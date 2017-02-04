@@ -1,0 +1,19 @@
+package com.xingguo.utils;
+/**
+ * 常量定义类
+ * @author yyp
+ *
+ */
+public class Const {
+	public static final String SUCCESS_STR="操作成功";
+	public static final String FAIL_STR="操作失败,请重试或联系管理员";
+	public static final String PARAM_ERROR="参数错误";
+	public static final int DEFAULT_PAGE_NO=1;
+	public static final int DEFAULT_PAGE_SIZE=12;
+	public static final String THE_RECORD_NOT_EXSIT="该记录不存在或已被删除";
+	public static final String THE_NAME_IS_EXSIT="该规则名称已经存在";
+	public static final String THE_ORG_IS_NOT_EXSIT="该组织不存在或已被删除，请重新选择！";
+	public static final String THE_DEPT_IS_NOT_EXSIT="该部门不存在或已被删除，请重新选择！";
+	public static final String THE_LOGIN_NAME_HAS_EXSIT="该用户名已经存在";
+	public static final String AES_KEY="xgkj@168138";//公用密码AES加密密匙
+}

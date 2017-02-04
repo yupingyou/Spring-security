@@ -1,0 +1,37 @@
+package com.xingguo.action.sys;
+
+import java.util.HashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.xingguo.action.common.BaseAction;
+import com.xingguo.entity.AppUsers;
+import com.xingguo.service.sys.AppUserService;
+
+public class UserAction extends BaseAction<AppUsers> {
+	@Autowired
+	private AppUserService userService;
+	
+	
+	public String register(){
+		jsonData=new HashMap<String, Object>();
+		try {
+			userService.save(entity);
+			jsonData.put("信息", "注册成功");
+		} catch (Exception e) {
+			log.error("", e);
+			jsonData.put("信息", e);
+		}
+		return JSON_RESULT;
+	}
+
+
+	@Override
+	public AppUsers getModel() {
+		if(entity==null){
+			entity=new AppUsers();
+		}
+		return entity;
+	}
+	
+}

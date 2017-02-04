@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.multipart.maxSize" value="10485760"></constant>
+	<!-- 系统管理 -->
+	<package name="system" namespace="/sys" extends="main_pk">
+		<!-- 用户 -->
+		<action name="/user/*" method="{1}" class="com.xingguo.action.sys.UserAction"></action>
+		<!-- 部门 -->
+		<action name="/dept/*" method="{1}" class="com.xingguo.action.sys.DeptAction"></action>
+	</package>
+</struts>    

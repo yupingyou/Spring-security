@@ -1,0 +1,28 @@
+package com.xingguo.action.sys;
+
+import java.util.HashMap;
+
+import com.xingguo.action.common.BaseAction;
+import com.xingguo.entity.AppDept;
+
+public class DeptAction extends BaseAction<AppDept> {
+	
+	public String loadDeptTree(){
+		jsonData=new HashMap<String, Object>();
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return JSON_RESULT;
+	}
+	
+	@Override
+	public AppDept getModel() {
+		if(entity==null){
+			entity=new AppDept();
+		}
+		return entity;
+	}
+	
+}

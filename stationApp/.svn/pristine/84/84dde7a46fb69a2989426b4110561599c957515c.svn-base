@@ -1,0 +1,105 @@
+package com.xingguo.action.sys;
+
+import java.util.Date;
+import java.util.HashMap;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.xingguo.action.common.BaseAction;
+import com.xingguo.entity.AppOrg;
+import com.xingguo.service.sys.AppOrgService;
+import com.xingguo.springSecurity.utils.SpringSecurityUtils;
+import com.xingguo.utils.UUIDSupport;
+
+public class OrgAction extends BaseAction<AppOrg> {
+
+	@Autowired
+	private AppOrgService appOrgService;
+	
+	private String ids;
+	
+	@Override
+	public AppOrg getModel() {
+		if (entity == null) {
+			entity = new AppOrg();
+		}
+		return entity;
+	}
+
+	public String list(){
+		jsonData=new HashMap<String, Object>();
+		try {
+			pageSize=12;
+			pagination = appOrgService.findPageWithCondition(condition,pageNo,pageSize); 
+			jsonData.put("page", pagination);
+		} catch (Exception e) {
+			log.error(e);
+		}
+		return JSON_RESULT;
+	}
+	
+	public String insert(){
+		jsonData=new HashMap<String, Object>();
+		try {
+			Date date=new Date();
+			entity.setId(UUIDSupport.getUUIDWithoutMinus());
+			entity.setCreateDate(date);
+			entity.setCreator(SpringSecurityUtils.getCurrUserName());
+			appOrgService.save(entity);
+		} catch (Exception e) {
+			log.error(e);
+		}
+		return JSON_RESULT;
+	}
+	
+	public String show(){
+		jsonData=new HashMap<String, Object>();
+		try {
+			entity = appOrgService.findById(entity.getId());
+			jsonData.put("entity", entity);
+		} catch (Exception e) {
+			log.error(e);
+		}
+		return JSON_RESULT;
+	}
+	
+	public String update(){
+		jsonData=new HashMap<String, Object>();
+		try {
+			AppOrg org=appOrgService.findById(entity.getId());
+			org.setAddr(entity.getAddr());
+			org.setOrgName(entity.getOrgName());
+			org.setOrgSimpleName(entity.getOrgSimpleName());
+			org.setOrgTel(entity.getOrgTel());
+			org.setOrgEmail(entity.getOrgEmail());
+			org.setLawRepresentative(entity.getLawRepresentative());
+			appOrgService.update(org);
+		} catch (Exception e) {
+			log.error(e);
+		}
+		return JSON_RESULT;
+	}
+	
+	public String delete(){
+		try {
+			if(ids!=null&&ids!=""){
+				String[] arr = ids.split(",");
+				appOrgService.batchDelete(arr);
+			}
+		} catch (Exception e) {
+			log.error(e);
+		}
+		return JSON_RESULT;
+	}
+
+	public String getIds() {
+		return ids;
+	}
+
+	public void setIds(String ids) {
+		this.ids = ids;
+	}
+	
+	
+}

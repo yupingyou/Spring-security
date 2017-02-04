@@ -1,0 +1,9 @@
+package com.xingguo.constants;
+/**
+ * 系统常亮定义类
+ * @author xg
+ *
+ */
+public class SystemConst {
+	public final static int PAGE_SIZE=12;
+}

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>会员中心</title>
+	</head>
+	<body>
+		<div class="module">
+			<!--左侧工具栏 stars-->
+			<div class="tool_left" id="monmenu">
+				<div class="title"><a href="javascript:;"><span class="icon glyphicon glyphicon-chevron-left" id="slidicon"></span></a></div>
+				<div class="tool" id="options">
+					<ul class="toolp" id="pSubMenu">
+						<li class="station"><a class="add" href="javascript:;" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="发卡" onclick="openpop(this)" ><i class="icon glyphicon glyphicon-plus"></i>发卡</a></li>
+						<li class="station"><a class="rep" href="javascript:;" data-toggle="tooltip" data-placement="right" data-trigger="hover" title="补卡" onclick="optsedit(this,'radio')" ><i class="icon glyphicon glyphicon-edit"></i>补卡</a></li>
+						<li class="station"><a class="free" href="javascript:;" data-toggle="tooltip" data-placement="right" data-trigger="hover" title="冻结" onclick="optsedit(this,'radio')" ><i class="icon glyphicon glyphicon-asterisk"></i>冻结</a></li>
+						<li class="station"><a class="thaw" href="javascript:;" data-toggle="tooltip" data-placement="right" data-trigger="hover" title="解冻" onclick="optsedit(this,'radio')" ><i class="icon glyphicon glyphicon-tint"></i>解冻</a></li>
+						<li class="station"><a class="full" href="javascript:;" data-toggle="tooltip" data-placement="right" data-trigger="hover" title="充值" onclick="optsedit(this,'radio')" ><i class="icon glyphicon glyphicon-plane"></i>充值</a></li>
+					</ul>
+				</div>
+			</div>
+			<!--end 左侧工具栏-->
+			<div class="contentbox">
+				<div class="navBar navBar_bg">
+					<div class="breadCrumb">
+						<ol>
+							<li title="营销管理">营销管理</li>
+							<li title="会员中心">会员中心</li>
+						</ol>
+					</div>
+				</div>
+				<div class="main_box">
+					<div class="screen pl20">
+						<div class="row">
+							<form class="form-inline">
+								<div class="col-xs-11 screen_left">
+									<div class="col-xs-12 plf0">
+										<div class="col-xs-1 plf0 ops mb5 screen_title">
+											<span class="form-group screen_org pr5">高级筛选:</span>
+										</div>
+										<div class="col-xs-11 plf0 ops mb5">
+											<div class="input-group input-group-sm">
+												<span class="input-group-addon">姓名</span>
+												<input type="text" class="form-control" />
+											</div>
+											<div class="input-group input-group-sm">
+												<span class="input-group-addon">手机号码</span>
+												<input type="text" class="form-control" />
+											</div>
+											<div class="input-group input-group-sm">
+												<span class="input-group-addon">会员卡号</span>
+												<input type="text" class="form-control" />
+											</div>
+											<div class="input-group input-group-sm">
+												<label for="select_province" class="input-group-addon">状态</label>
+												<select class="form-control">
+													<option>请选择</option>
+													<option>全部</option>
+													<option>激活</option>
+													<option>冻结</option>
+												</select>
+												<b class="dropdown-bg"></b>
+												<i class="dropdown-trigger"></i>
+											</div>
+											<div class="input-group input-group-sm">
+												<span class="input-group-addon">注册时间</span>
+												<input type="text" class="form-control timeTip" placeholder="请选择时间"  >
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-1 plf0 text-center">
+									<button type="button" class="btn btn-warning btn-sm" title="导出Excel">导出Excel</button>
+									<button type="button" class="btn btn-danger btn-sm" title="确定查询">确定查询</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<table class="table table-striped mtable-striped table-hover table_hide" id="list">
+						<thead>
+							<th class="tab-checkbox">
+							</th>
+							<th>序号</th>
+							<th>姓名</th>
+							<th>手机号码</th>
+							<th>会员卡号</th>
+							<th>卡内余额</th>
+							<th>类别</th>
+							<th>状态</th>
+							<th>详情</th>
+						</thead>
+						<tbody >
+							<tr>
+								<td class="tab-checkbox">
+									<input type="checkbox" name="select" value="" />
+									<input type="radio" name="single" value="" />
+								</td>
+								<td>1</td>
+								<td>陈冠华</td>
+								<td>13600044633</td>
+								<td>9858725145932</td>
+								<td>523<span class="table_unit">￥</span></td>
+								<td>APP用户</td>
+								<td><span class="normal">激活</span></td>
+								<td><a class="find" href="javascript:;" title="查看" onclick="openpop(this)" >查看</a></td>
+							</tr>
+							<tr>
+								<td class="tab-checkbox">
+									<input type="checkbox" name="select" value="" />
+									<input type="radio" name="single" value="" />
+								</td>
+								<td>2</td>
+								<td>陈俊宏</td>
+								<td>13533332047</td>
+								<td>4936774891377</td>
+								<td>453<span class="table_unit">￥</span></td>
+								<td>APP用户</td>
+								<td><span class="normal">激活</span></td>
+								<td><a class="find" href="javascript:;" title="查看" onclick="openpop(this)" >查看</a></td>
+							</tr>
+							<tr>
+								<td class="tab-checkbox">
+									<input type="checkbox" name="select" value="" />
+									<input type="radio" name="single" value="" />
+								</td>
+								<td>3</td>
+								<td>陈彦辰</td>
+								<td>13533337929</td>
+								<td>9983478362313</td>
+								<td>244<span class="table_unit">￥</span></td>
+								<td>APP用户</td>
+								<td><span class="normal">激活</span></td>
+								<td><a class="find" href="javascript:;" title="查看" onclick="openpop(this)" >查看</a></td>
+							</tr>
+							<tr>
+								<td class="tab-checkbox">
+									<input type="checkbox" name="select" value="" />
+									<input type="radio" name="single" value="" />
+								</td>
+								<td>4</td>
+								<td>杨桐</td>
+								<td>18125170000</td>
+								<td>8377190091082</td>
+								<td>534<span class="table_unit">￥</span></td>
+								<td>APP用户</td>
+								<td><span class="normal">激活</span></td>
+								<td><a class="find" href="javascript:;" title="查看" onclick="openpop(this)" >查看</a></td>
+							</tr>
+							<tr>
+								<td class="tab-checkbox">
+									<input type="checkbox" name="select" value="" />
+									<input type="radio" name="single" value="" />
+								</td>
+								<td>5</td>
+								<td>钟承敏</td>
+								<td>13902201447</td>
+								<td>0026916285254</td>
+								<td>423<span class="table_unit">￥</span></td>
+								<td>APP用户</td>
+								<td><span class="normal">激活</span></td>
+								<td><a class="find" href="javascript:;" title="查看" onclick="openpop(this)" >查看</a></td>
+							</tr>
+							<tr>
+								<td class="tab-checkbox">
+									<input type="checkbox" name="select" value="" />
+									<input type="radio" name="single" value="" />
+								</td>
+								<td>6</td>
+								<td>潘国栋</td>
+								<td>13922287057</td>
+								<td>8067781705034</td>
+								<td>352<span class="table_unit">￥</span></td>
+								<td>APP用户</td>
+								<td><span class="normal">激活</span></td>
+								<td><a class="find" href="javascript:;" title="查看" onclick="openpop(this)" >查看</a></td>
+							</tr>
+							<tr>
+								<td class="tab-checkbox">
+									<input type="checkbox" name="select" value="" />
+									<input type="radio" name="single" value="" />
+								</td>
+								<td>7</td>
+								<td>徐文</td>
+								<td>15975549044</td>
+								<td>6204598422304</td>
+								<td>234<span class="table_unit">￥</span></td>
+								<td>IC卡用户</td>
+								<td><span class="normal">激活</span></td>
+								<td><a class="find" href="javascript:;" title="查看" onclick="openpop(this)" >查看</a></td>
+							</tr>
+							<tr>
+								<td class="tab-checkbox">
+									<input type="checkbox" name="select" value="" />
+									<input type="radio" name="single" value="" />
+								</td>
+								<td>8</td>
+								<td>罗磊</td>
+								<td>15021333341</td>
+								<td>8738261801371</td>
+								<td>324<span class="table_unit">￥</span></td>
+								<td>IC卡用户</td>
+								<td><span class="normal">激活</span></td>
+								<td><a class="find" href="javascript:;" title="查看" onclick="openpop(this)" >查看</a></td>
+							</tr>
+							<tr>
+								<td class="tab-checkbox">
+									<input type="checkbox" name="select" value="" />
+									<input type="radio" name="single" value="" />
+								</td>
+								<td>9</td>
+								<td>艾华桥</td>
+								<td>15527732315</td>
+								<td>9296660763123</td>
+								<td>245<span class="table_unit">￥</span></td>
+								<td>APP用户</td>
+								<td><span class="normal">激活</span></td>
+								<td><a class="find" href="javascript:;" title="查看" onclick="openpop(this)" >查看</a></td>
+							</tr>
+							<tr>
+								<td class="tab-checkbox">
+									<input type="checkbox" name="select" value="" />
+									<input type="radio" name="single" value="" />
+								</td>
+								<td>10</td>
+								<td>曹伟明</td>
+								<td>18318570581</td>
+								<td>1113536704812</td>
+								<td>568<span class="table_unit">￥</span></td>
+								<td>APP用户</td>
+								<td><span class="normal">激活</span></td>
+								<td><a class="find" href="javascript:;" title="查看" onclick="openpop(this)" >查看</a></td>
+							</tr>
+							<tr>
+								<td class="tab-checkbox">
+									<input type="checkbox" name="select" value="" />
+									<input type="radio" name="single" value="" />
+								</td>
+								<td>11</td>
+								<td>陈福祥</td>
+								<td>13580406066</td>
+								<td>2848584664331</td>
+								<td>874<span class="table_unit">￥</span></td>
+								<td>IC卡用户</td>
+								<td><span class="shut">冻结</span></td>
+								<td><a class="find" href="javascript:;" title="查看" onclick="openpop(this)" >查看</a></td>
+							</tr>
+							<tr>
+								<td class="tab-checkbox">
+									<input type="checkbox" name="select" value="" />
+									<input type="radio" name="single" value="" />
+								</td>
+								<td>12</td>
+								<td>冯伍非</td>
+								<td>13265397670</td>
+								<td>8138490824161</td>
+								<td>458<span class="table_unit">￥</span></td>
+								<td>IC卡用户</td>
+								<td><span class="normal">激活</span></td>
+								<td><a class="find" href="javascript:;" title="查看" onclick="openpop(this)" >查看</a></td>
+							</tr>
+						</tbody>
+						<!--分页 stars-->
+						<tfoot>
+							<tr>
+								<td colspan="9">
+									<div class="col-xs-12">
+										<ul class="btn-tool">
+											<!--补卡-->
+											<li class="rep">
+												<button  type="button" class="rep btn btn-warning" title="补卡" onclick="openpop(this)">
+													<span class="ico"><i class="iconfont icon-cg"></i></span><span class="iconchar">补卡</span>
+												</button>
+												<button  type="button" class="btn btn-default tool-cancel" title="取消">
+													<span class="ico"><i class="iconfont icon-cw"></i></span><span class="iconchar">取消</span>
+												</button>
+											</li>
+											<!--冻结-->
+											<li class="free">
+												<button  type="button" class="free btn btn-warning" title="冻结" onclick="xconfirm('确定是否对选中用户进行冻结?');">
+													<span class="ico"><i class="iconfont icon-cg"></i></span><span class="iconchar">冻结</span>
+												</button>
+												<button  type="button" class="btn btn-default tool-cancel" title="取消">
+													<span class="ico"><i class="iconfont icon-cw"></i></span><span class="iconchar">取消</span>
+												</button>
+											</li>
+											<!--解冻-->
+											<li class="thaw">
+												<button  type="button" class="thaw btn btn-warning" title="解冻" onclick="xconfirm('确定是否对选中用户进行解冻?');">
+													<span class="ico"><i class="iconfont icon-cg"></i></span><span class="iconchar">解冻</span>
+												</button>
+												<button  type="button" class="btn btn-default tool-cancel" title="取消">
+													<span class="ico"><i class="iconfont icon-cw"></i></span><span class="iconchar">取消</span>
+												</button>
+											</li>
+											<!--充值-->
+											<li class="full">
+												<button  type="button" class="full btn btn-warning" title="充值" onclick="openpop(this)">
+													<span class="ico"><i class="iconfont icon-cg"></i></span><span class="iconchar">充值</span>
+												</button>
+												<button  type="button" class="btn btn-default tool-cancel" title="取消">
+													<span class="ico"><i class="iconfont icon-cw"></i></span><span class="iconchar">取消</span>
+												</button>
+											</li>
+										</ul>
+									</div>
+									<div class="col-xs-12 text-center" id="ftpage">
+										<ul class="pagination pagination-color ">
+											<li class="start invisible">
+												<a href="javascript:;" title="首页">首页</a>
+											</li>
+											<li class="prev disabled">
+												<a href="javascript:;" title="上一页"><span>上一页</span></a>
+											</li>
+											<li class="leaf active">
+												<a href="javascript:;">1</a>
+											</li>
+											<li class="leaf">
+												<a href="javascript:;">2</a>
+											</li>
+											<li class="leaf">
+												<a href="javascript:;">3</a>
+											</li>
+											<li class="leaf">
+												<a href="javascript:;">4</a>
+											</li>
+											<li class="leaf">
+												<a href="javascript:;">5</a>
+											</li>
+											<li class="next">
+												<a href="javascript:;" title="下一页"><span>下一页</span></a>
+											</li>
+											<li class="end">
+												<a href="javascript:;" title="尾页">尾页</a>
+											</li>
+											<span class="fany">&nbsp;第 <span class="curr">1</span> 页 &nbsp;|&nbsp;共 <span class="total">5</span>页</span>
+										</ul>
+									</div>
+								</td>
+							</tr>
+						</tfoot>
+						<!--end 分页-->
+					</table>
+				</div>
+			</div>
+			<!--选择读卡机链接接口-->
+			<div class="xform" id="add" >
+				<div>
+					<div class="f_haeder">
+						<span>选择读卡机链接接口</span>
+						<a class="f_close" href="javascript:;" title="关闭">
+							<span></span>
+						</a>
+					</div>
+					<form class="f_cont">
+						<div class="opts">
+							<ul>
+								<li>
+									<a class="hair btn btn-warning" onclick="openpop(this)">COM1</a>
+									<a class="hair btn btn-warning" onclick="openpop(this)">COM2</a>
+									<a class="hair btn btn-warning" onclick="openpop(this)">COM3</a>
+									<a class="hair btn btn-warning" onclick="openpop(this)">COM4</a>
+								</li>
+								<li>
+									<a class="hair btn btn-warning" onclick="openpop(this)">COM5</a>
+									<a class="hair btn btn-warning" onclick="openpop(this)">COM6</a>
+									<a class="hair btn btn-warning" onclick="openpop(this)">COM7</a>
+									<a class="hair btn btn-warning" onclick="openpop(this)">COM8</a>
+								</li>
+							</ul>
+							
+							
+						</div>
+					</form>
+				</div>
+			</div>
+			<!--发卡-->
+			<div class="xform" id="hair" >
+				<div>
+					<div class="f_haeder">
+						<span>发卡</span>
+						<a class="f_close" href="javascript:;" title="关闭">
+							<span></span>
+						</a>
+					</div>
+					<form class="f_cont">
+						<table >
+							<tbody>
+								<tr>
+									<td>手机号码</td>
+									<td><input class="form-control" type="text" placeholder="请输入"/></td>
+								</tr>
+								<tr>
+									<td>姓名</td>
+									<td><input class="form-control" type="text" placeholder="请输入"/></td>
+								</tr>
+								<tr>
+									<td>驾驶车型</td>
+									<td><input class="form-control" type="text" placeholder="请输入"/></td>
+								</tr>
+								<tr>
+									<td>购买年份</td>
+									<td><input type="text" class="form-control timeTip" placeholder="请选择时间"  ></td>
+								</tr>
+								<tr>
+									<td>充电类型</td>
+									<td>
+										<select class="form-control">
+											<option>交流</option>
+											<option>直流</option>
+										</select>
+										<b class="dropdown-bg"></b>
+										<i class="dropdown-trigger"></i>
+									</td>
+								</tr>
+								<tr>
+									<td>会员卡号</td>
+									<td><input class="form-control" type="text" placeholder="请输入"/></td>
+								</tr>
+								<tr>
+									<td>状态</td>
+									<td>
+										<select class="form-control">
+											<option>未激活</option>
+											<option>激活</option>
+										</select>
+										<b class="dropdown-bg"></b>
+										<i class="dropdown-trigger"></i>
+									</td>
+								</tr>
+								<tr>
+									<td>卡内余额</td>
+									<td><input class="form-control" type="text" placeholder="请输入"/></td>
+								</tr>
+								<tr>
+									<td>经办人</td>
+									<td><input class="form-control" type="text" placeholder="请输入"/></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="opts">
+							<a class="btn btn-warning">确定</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!--补卡-->
+			<div class="xform" id="rep" >
+				<div>
+					<div class="f_haeder">
+						<span>补卡</span>
+						<a class="f_close" href="javascript:;" title="关闭">
+							<span></span>
+						</a>
+					</div>
+					<form class="f_cont">
+						<table >
+							<tbody>
+								<tr>
+									<td>手机号码</td>
+									<td><input class="form-control" type="text" placeholder="请输入"/></td>
+								</tr>
+								<tr>
+									<td>姓名</td>
+									<td><input class="form-control" type="text" placeholder="请输入"/></td>
+								</tr>
+								<tr>
+									<td>驾驶车型</td>
+									<td>特斯拉Model S EV</td>
+								</tr>
+								<tr>
+									<td>购买年份</td>
+									<td>2015-09-16</td>
+								</tr>
+								<tr>
+									<td>充电类型</td>
+									<td>交流</td>
+								</tr>
+								<tr>
+									<td>会员卡号</td>
+									<td>9858725145932</td>
+								</tr>
+								<tr>
+									<td>类别</td>
+									<td>IC卡用户</td>
+								</tr>
+								<tr>
+									<td>状态</td>
+									<td>激活</td>
+								</tr>
+								<tr>
+									<td>卡内余额</td>
+									<td>523¥</td>
+								</tr>
+								<tr>
+									<td>注册时间</td>
+									<td>2015-09-16</td>
+								</tr>
+								<tr>
+									<td>经办人</td>
+									<td>陈冠华</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="opts">
+							<a class="btn btn-warning">确定</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!--充值-->
+			<div class="xform" id="full" >
+				<div>
+					<div class="f_haeder">
+						<span>充值</span>
+						<a class="f_close" href="javascript:;" title="关闭">
+							<span></span>
+						</a>
+					</div>
+					<form class="f_cont">
+						<table >
+							<tbody>
+								<tr>
+									<td>充值金额</td>
+									<td><input class="form-control" type="text" placeholder="请输入"/></td>
+								</tr>
+								<tr>
+									<td>姓名</td>
+									<td>陈冠华</td>
+								</tr>
+								<tr>
+									<td>手机号</td>
+									<td>13574152544</td>
+								</tr>
+								<tr>
+									<td>购买年份</td>
+									<td>2016-06-16</td>
+								</tr>
+								<tr>
+									<td>充电类型</td>
+									<td>交流</td>
+								</tr>
+								<tr>
+									<td>会员卡号</td>
+									<td>9858725145932</td>
+								</tr>
+								<tr>
+									<td>类别</td>
+									<td>APP用户</td>
+								</tr>
+								<tr>
+									<td>状态</td>
+									<td>激活</td>
+								</tr>
+								<tr>
+									<td>卡内余额</td>
+									<td>523￥</td>
+								</tr>
+								<tr>
+									<td>注册时间</td>
+									<td>2015-10-02</td>
+								</tr>
+								<tr>
+									<td>经办人</td>
+									<td>陈燕璇</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="opts">
+							<a class="btn btn-warning">确定</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!--详情-->
+			<div class="xform" id="find" >
+				<div>
+					<div class="f_haeder">
+						<span>陈冠华</span>
+						<a class="f_close" href="javascript:;" title="关闭">
+							<span></span>
+						</a>
+					</div>
+					<form class="f_cont">
+						<table >
+							<tbody>
+								<tr>
+									<td>手机号码</td>
+									<td>13600044633</td>
+								</tr>
+								<tr>
+									<td>驾驶车型</td>
+									<td>特斯拉Model S EV</td>
+								</tr>
+								<tr>
+									<td>购买年份</td>
+									<td>2016-06-16</td>
+								</tr>
+								<tr>
+									<td>充电类型</td>
+									<td>交流</td>
+								</tr>
+								<tr>
+									<td>会员卡号</td>
+									<td>9858725145932</td>
+								</tr>
+								<tr>
+									<td>类型</td>
+									<td>APP用户</td>
+								</tr>
+								<tr>
+									<td>状态</td>
+									<td>激活</td>
+								</tr>
+								<tr>
+									<td>卡内余额(¥)</td>
+									<td>523</td>
+								</tr>
+								<tr>
+									<td>注册时间</td>
+									<td>2016-06-18</td>
+								</tr>
+								<tr>
+									<td>最后充值时间</td>
+									<td>2016-09-25</td>
+								</tr>
+								<tr>
+									<td>经办人</td>
+									<td>陈燕璇</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(".timeTip").datetimepicker({
+	        	format: 'yyyy-MM-dd',
+	        	minView:'month',
+		 		language:  'zh-CN',
+	    		autoclose: 1,
+	        });
+		</script>
+	</body>
+</html>

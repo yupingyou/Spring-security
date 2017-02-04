@@ -1,0 +1,399 @@
+package com.xingguo.entity;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
+
+/**
+ * AppUsers entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "APP_USERS")
+public class AppUsers implements java.io.Serializable,UserDetails {
+
+	// Fields
+
+	private String id;
+	private String loginName;
+	private String userName;
+	private String password;
+	private String disabled;
+	private Integer userLockErrorNum;
+	private Integer userLockNum;
+	private Date createDate;
+	private String creator;
+	private Date modifyDate;
+	private String modifer;
+	private AppOrg org;
+	private AppDept dept;
+	private String mobilePhone;
+	private String tel;
+	private String email;
+	private String gender;
+	private String addr;
+	private String remark;
+	private String deleteFlag;
+	private Set<AppRoles> roles = new HashSet<AppRoles>(0);
+	
+	private Collection<GrantedAuthority> authorities;//权限信息
+	
+
+	// Constructors
+
+	/** default constructor */
+	public AppUsers() {
+	}
+
+	/** minimal constructor */
+	public AppUsers(String id, String loginName) {
+		this.id = id;
+		this.loginName = loginName;
+	}
+
+	/** full constructor */
+	public AppUsers(String id, String userLoginname, String userName,
+			String password, String disabled, Set<AppRoles> roles) {
+		this.id = id;
+		this.loginName = userLoginname;
+		this.userName = userName;
+		this.password = password;
+		this.disabled = disabled;
+		this.roles = roles;
+	}
+	
+	
+	/**
+	 * 静态构造方法：不包含关联属性
+	 * @param id
+	 * @param loginName
+	 * @param userName
+	 * @param disabled
+	 * @param userLockErrorNum
+	 * @param userLockNum
+	 * @param createDate
+	 * @param creator
+	 * @param modifyDate
+	 * @param modifer
+	 * @param mobilePhone
+	 * @param tel
+	 * @param email
+	 * @param gender
+	 * @param addr
+	 * @param remark
+	 * @param deleteFlag
+	 */
+	public AppUsers(String id, String loginName, String userName,
+			 String disabled, Integer userLockErrorNum,
+			Integer userLockNum, Date createDate, String creator,
+			Date modifyDate, String modifer, String mobilePhone, String tel,
+			String email, String gender, String addr, String remark,
+			String deleteFlag) {
+		super();
+		this.id = id;
+		this.loginName = loginName;
+		this.userName = userName;
+		this.disabled = disabled;
+		this.userLockErrorNum = userLockErrorNum;
+		this.userLockNum = userLockNum;
+		this.createDate = createDate;
+		this.creator = creator;
+		this.modifyDate = modifyDate;
+		this.modifer = modifer;
+		this.mobilePhone = mobilePhone;
+		this.tel = tel;
+		this.email = email;
+		this.gender = gender;
+		this.addr = addr;
+		this.remark = remark;
+		this.deleteFlag = deleteFlag;
+	}
+
+	// Property accessors
+	@Id
+	@Column(name = "ID", unique = true, nullable = false, length = 50)
+	public String getId() {
+		return this.id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	@Column(name = "USER_LOGINNAME", nullable = false, length = 50)
+	public String getLoginName() {
+		return this.loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+	@Column(name = "USER_NAME", length = 50)
+	public String getUserName() {
+		return this.userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	@Override
+	@Column(name = "PASSWORD", length = 50)
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	@Column(name = "DISABLED", length = 1)
+	public String getDisabled() {
+		return this.disabled;
+	}
+
+	public void setDisabled(String disabled) {
+		this.disabled = disabled;
+	}
+
+	/**
+	 * @return the roles
+	 */
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    @JoinTable(
+            name="app_user_role",
+            joinColumns=@JoinColumn(name="user_id"),
+            inverseJoinColumns=@JoinColumn(name="role_id")
+    )
+	public Set<AppRoles> getRoles() {
+		return roles;
+	}
+
+	/**
+	 * @param roles the roles to set
+	 */
+	public void setRoles(Set<AppRoles> roles) {
+		this.roles = roles;
+	}
+	/**
+	 * 获取当前用户的所有权限
+	 */
+	@Transient
+	@Override
+	public Collection<GrantedAuthority> getAuthorities() {
+		if(authorities==null){
+			authorities=new ArrayList<GrantedAuthority>();
+			if(roles!=null&&roles.size()>0){
+				for(AppRoles role:roles){
+					Set<AppResource> resources = role.getResources();
+					if(resources!=null&&resources.size()>0){
+						for(AppResource resource:resources){
+							//判断别的角色里是否已经存在这个资源code，由于GrantedAuthorityImpl重写了equals方法，底层机制是比较GrantedAuthorityImpl对象里的String role属性
+							if(!authorities.contains(new GrantedAuthorityImpl(resource.getResouceCode()))){
+								authorities.add(new GrantedAuthorityImpl(resource.getResouceCode()));
+							}
+						}
+					}
+					
+				}
+			}
+		}
+		return this.authorities;
+	}
+	@Column(name="user_lock_error_num")
+	public Integer getUserLockErrorNum() {
+		return this.userLockErrorNum;
+	}
+
+	public void setUserLockErrorNum(Integer userLockErrorNum) {
+		this.userLockErrorNum = userLockErrorNum;
+	}
+
+	/**
+	 * @return the userLockNum
+	 */
+	@Column(name="user_lock_num")
+	public Integer getUserLockNum() {
+		return userLockNum;
+	}
+
+	/**
+	 * @param userLockNum the userLockNum to set
+	 */
+	public void setUserLockNum(Integer userLockNum) {
+		this.userLockNum = userLockNum;
+	}
+	
+	
+	@Column(name="create_date")
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	@Column(name="creator",length=50)
+	public String getCreator() {
+		return creator;
+	}
+
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+	@Column(name="modify_date")
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+	@Column(name="modifer",length=50)
+	public String getModifer() {
+		return modifer;
+	}
+
+	public void setModifer(String modifer) {
+		this.modifer = modifer;
+	}
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="org_id")
+	public AppOrg getOrg() {
+		return org;
+	}
+
+	public void setOrg(AppOrg org) {
+		this.org = org;
+	}
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="dept_id")
+	public AppDept getDept() {
+		return dept;
+	}
+
+	public void setDept(AppDept dept) {
+		this.dept = dept;
+	}
+	@Column(name="mobile_phone",length=20)
+	public String getMobilePhone() {
+		return mobilePhone;
+	}
+
+	public void setMobilePhone(String mobilePhone) {
+		this.mobilePhone = mobilePhone;
+	}
+	@Column(name="tel",length=20)
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	@Column(name="email",length=50)
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	@Column(name="gender",length=1)
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	@Column(name="addr",length=100)
+	public String getAddr() {
+		return addr;
+	}
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	@Column(name="remark",length=1000)
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	/**
+	 * @return the deleteFlag
+	 */
+	@Column(name="delete_flag",length=1)
+	public String getDeleteFlag() {
+		return deleteFlag;
+	}
+
+	/**
+	 * @param deleteFlag the deleteFlag to set
+	 */
+	public void setDeleteFlag(String deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
+	
+	/***
+	 * Spring security field
+	 */
+	@Transient
+	@Override
+	public String getUsername() {
+		return this.loginName;
+	}
+	@Transient
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+	@Transient
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	@Transient
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+	@Transient
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+	/**
+	 * @param authorities the authorities to set
+	 */
+	public void setAuthorities(Collection<GrantedAuthority> authorities) {
+		this.authorities = authorities;
+	}
+
+	
+	
+	
+
+}

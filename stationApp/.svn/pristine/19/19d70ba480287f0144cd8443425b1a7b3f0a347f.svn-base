@@ -1,0 +1,405 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组织机构</title>
+	</head>
+	<body>
+		<div class="module">
+			<!--左侧工具栏 stars-->
+			<div class="tool_left" id="monmenu">
+				<div class="title"><a href="javascript:;"><span class="icon glyphicon glyphicon-chevron-left" id="slidicon"></span></a></div>
+				<div class="tool" id="options">
+					<ul id="pSubMenu">
+						<li><a class="add" href="javascript:;" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="新建" onclick="openpop(this)" ><i class="icon glyphicon glyphicon-plus"></i>新建</a></li>
+						<li><a class="update" href="javascript:;" data-toggle="tooltip" data-placement="right" data-trigger="hover" title="修改" onclick="optsedit(this,'radio')"><i class="icon glyphicon glyphicon-pencil"></i>修改</a></li>
+						<li><a class="del" href="javascript:;" data-toggle="tooltip" data-placement="right" data-trigger="hover" title="删除" onclick="optsedit(this,'checkbox')"><i class="icon glyphicon glyphicon-trash"></i>删除</a></li>
+					</ul>
+				</div>
+			</div>
+			<!--end 左侧工具栏-->
+			<div class="contentbox">
+				<div class="navBar navBar_bg">
+					<div class="breadCrumb">
+						<ol>
+							<li title="系统管理">系统管理</li>
+							<li title="组织机构">组织机构</li>
+						</ol>
+					</div>
+				</div>
+				<div class="main_box">
+					<div class="screen pl20">
+						<div class="row">
+							<form class="form-inline">
+								<div class="col-xs-11 screen_left">
+									<div class="col-xs-12 plf0">
+										<div class="col-xs-1 plf0 ops mb5 screen_title">
+											<span class="form-group screen_org pr5">高级筛选:</span>
+										</div>
+										<div class="col-xs-11 plf0 ops mb5">
+											<div class="input-group input-group-sm">
+												<label for="select_province" class="input-group-addon">组织名称</label>
+												<select class="form-control">
+													<option>请选择</option>
+													<option>全部组织</option>
+													<option>广东兴国</option>
+													<option>江门兴国</option>
+													<option>佛山兴国</option>
+													<option>深圳兴国</option>
+													<option>厦门兴国</option>
+												</select>
+											</div>
+											<div class="input-group input-group-sm">
+												<span class="input-group-addon">创建日期</span>
+												<input type="text" class="form-control timeTip" placeholder="请选择时间">
+												<span class="input-group-addon">-至-</span>
+												<input type="text" class="form-control timeTip" placeholder="请选择时间">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-1 plf0 text-center">
+									<button type="button" class="btn btn-warning btn-sm" title="导出Excel">导出Excel</button>
+									<button type="button" class="btn btn-danger btn-sm" title="确定查询">确定查询</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<table class="table table-striped mtable-striped table-hover table_hide" id="list">
+						<thead>
+							<tr>
+								<th class="tab-checkbox">
+								</th>
+								<th>序号</th>
+								<th>组织名称</th>
+								<th>组织简称</th>
+								<th>法人代表</th>
+								<th>组织电话</th>
+								<th>组织邮箱</th>
+								<th>详细地址</th>
+								<th>创建时间</th>
+								<th>备注</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- <tr>
+								<td class="ruleSet_td tab-checkbox">
+									<input type="checkbox" name="select" value="" />
+									<input type="radio" name="single" value="" />
+								</td>
+								<td>1</td>
+								<td>江门兴国</td>
+								<td>JMXG</td>
+								<td>陈冠华</td>
+								<td>18745112353</td>
+								<td>15422541@163.com</td>
+								<td>光谱西路3号</td>
+								<td>2015-10-09 10:13:12</td>
+								<td>无</td>
+							</tr> -->
+						</tbody>
+						<!--分页 stars-->
+						<tfoot>
+							<tr>
+								<td colspan="10">
+									<div class="col-xs-12">
+										<ul class="btn-tool">
+											<!--修改-->
+											<li class="update">
+												<button  type="button" class="update btn btn-warning beforeupdate" title="修改" >
+													<span class="ico"><i class="iconfont icon-cg"></i></span><span class="iconchar">修改</span>
+												</button>
+												<button  type="button" class="btn btn-default tool-cancel" title="取消">
+													<span class="ico"><i class="iconfont icon-cw"></i></span><span class="iconchar">取消</span>
+												</button>
+											</li>
+											<!--删除-->
+											<li class="del">
+												<button  type="button" class="btn btn-warning deletebutton" title="删除">
+													<span class="ico"><i class="iconfont icon-cg"></i></span><span class="iconchar">删除</span>
+												</button>
+												<button  type="button" class="btn btn-default tool-cancel" title="取消">
+													<span class="ico"><i class="iconfont icon-cw"></i></span><span class="iconchar">取消</span>
+												</button>
+											</li>
+										</ul>
+									</div>
+									<div class="col-xs-12 text-center" id="ftpage">
+										<ul class="pagination pagination-color ">
+										<!-- 分页 -->
+										</ul>
+									</div>
+								</td>
+							</tr>
+						</tfoot>
+						<!--end 分页-->
+					</table>
+				</div>
+			</div>
+		</div>	
+		<!--添加-->
+		<div class="xform" id="add" >
+			<div>
+				<div class="f_haeder">
+					<span>添加</span>
+					<a class="f_close add_close" href="javascript:;" title="关闭">
+						<span></span>
+					</a>
+				</div>
+				<form class="f_cont addForm">
+					<table >
+						<tbody>
+							<tr>
+								<td>企业名称</td>
+								<td>
+									<input class="form-control" type="text" placeholder="请输入" name="orgName"/>
+								</td>
+							</tr>
+							<tr>
+								<td>企业简称</td>
+								<td>
+									<input class="form-control" type="text" placeholder="请输入" name="orgSimpleName"/>
+								</td>
+							</tr>
+							<tr>
+								<td>企业邮箱</td>
+								<td>
+									<input class="form-control" type="text" placeholder="请输入" name="orgEmail"/>
+								</td>
+							</tr>
+							<tr>
+								<td>企业电话</td>
+								<td>
+									<input class="form-control" type="text" placeholder="请输入" name="orgTel"/>
+								</td>
+							</tr>
+							<tr>
+								<td>法人代表</td>
+								<td>
+									<input class="form-control" type="text" placeholder="请输入" name="lawRepresentative"/>
+								</td>
+							</tr>
+							<tr>
+								<td>详细地址</td>
+								<td class="textarea">
+									<textarea class="form-control" placeholder="请输入" name="addr"></textarea>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="opts">
+						<a class="btn btn-warning addbutton">确定</a>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!--修改-->
+		<div class="xform" id="update" >
+			<div>
+				<div class="f_haeder">
+					<span>修改</span>
+					<a class="f_close update_close" href="javascript:;" title="关闭">
+						<span></span>
+					</a>
+				</div>
+				<form class="f_cont updateForm">
+					<table >
+						<tbody>
+						<input type="hidden" name="id" />
+						<tr>
+								<td>企业名称</td>
+								<td>
+									<input class="form-control" type="text" placeholder="请输入" name="orgName"/>
+								</td>
+							</tr>
+							<tr>
+								<td>企业简称</td>
+								<td>
+									<input class="form-control" type="text" placeholder="请输入" name="orgSimpleName"/>
+								</td>
+							</tr>
+							<tr>
+								<td>企业邮箱</td>
+								<td>
+									<input class="form-control" type="text" placeholder="请输入" name="orgEmail"/>
+								</td>
+							</tr>
+							<tr>
+								<td>企业电话</td>
+								<td>
+									<input class="form-control" type="text" placeholder="请输入" name="orgTel"/>
+								</td>
+							</tr>
+							<tr>
+								<td>法人代表</td>
+								<td>
+									<input class="form-control" type="text" placeholder="请输入" name="lawRepresentative"/>
+								</td>
+							</tr>
+							<tr>
+								<td>详细地址</td>
+								<td class="textarea">
+									<textarea class="form-control" placeholder="请输入" name="addr"></textarea>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="opts">
+						<a class="btn btn-warning updatebutton">确定</a>
+					</div>
+				</form>
+			</div>
+		</div>
+		<script>
+			var org={
+				init:function(){
+					this.add();
+					this.loadData(1);
+					this.update();
+					this.delete1();
+				},
+				loadData:function(pageNo){
+					$.ajax({
+						url : '<s:url action="list" namespace="/sys/org"/>',
+						type:"POST",
+						data:{pageNo:pageNo},
+						cache:false,
+						success:function(data){
+							org.loadHTML(data.page);
+							pagination.load(data.page,"#ftpage ul");
+						},
+						error:function(data){
+							xerror(data.responseText);
+						}	
+					});
+				},
+				loadHTML:function(data){
+                	var html="";
+                	$.each(data.items,function(i,entity){
+                		i=(data.pageNo-1)*data.pageSize+(i+1);
+                		var createDate=(entity.createDate!=null?entity.createDate.replace(/T/, " "):"");
+                		html+="<tr>"+
+							"	<td class='ruleSet_td tab-checkbox'>"+
+							"		<input type='checkbox' name='select' value='' data-id='"+entity.id+"'/>"+
+							"		<input type='radio' name='single' value='' data-id='"+entity.id+"'/>"+
+							"	</td>"+
+							"	<td>"+i+"</td>"+
+							"	<td>"+(entity.orgName||"")+"</td>"+
+							"	<td>"+(entity.orgSimpleName||"")+"</td>"+
+							"	<td>"+(entity.lawRepresentative||"")+"</td>"+
+							"	<td>"+(entity.orgTel||"")+"</td>"+
+							"	<td>"+(entity.orgEmail||"")+"</td>"+
+							"	<td>"+(entity.addr||"")+"</td>"+
+							"	<td>"+createDate+"</td>"+
+							"	<td>无</td>"+
+							"</tr>";
+                	});
+                	$(".main_box tbody").html(html);
+                },
+				add:function(){
+					$(".addbutton").click(function(){
+						var formData=$(".addForm").serializeObject();
+						$.ajax({
+							url : '<s:url action="insert" namespace="/sys/org"/>',
+							type:"POST",
+							data:formData,
+							cache:false,
+							success:function(data){
+								xalert("新增成功");
+								org.loadData(1);
+								$(".add_close").trigger("click");
+							},
+							error:function(data){
+								xerror(data.responseText);
+							}	
+						});
+					});
+				},
+				update:function(){
+					$(".beforeupdate").click(function(){//加载组织数据
+						var $this=this;
+						var radio=$("#list").find(".tab-checkbox input[type='radio']");
+						var id="";
+						for(var i=0;i<radio.length;i++){
+							if(radio[i].checked==true){
+								id=$(radio[i]).data("id");
+								break;
+							}
+						}
+						$.ajax({
+							url : '<s:url action="show" namespace="/sys/org"/>',
+							type:"POST",
+							data:{id:id},
+							cache:false,
+							success:function(data){
+								var entity=data.entity;
+								$("#update input[name=id]").val((entity.id||""));
+								$("#update input[name=orgName]").val((entity.orgName||""));
+								$("#update input[name=orgSimpleName]").val((entity.orgSimpleName||""));
+								$("#update input[name=orgEmail]").val((entity.orgEmail||""));
+								$("#update input[name=orgTel]").val((entity.orgTel||""));
+								$("#update input[name=lawRepresentative]").val((entity.lawRepresentative||""));
+								$("#update textarea[name=addr]").val((entity.addr||""));
+								openpop($this);
+							},
+							error:function(data){
+								xerror(data.responseText);
+							}	
+						}); 
+					});
+					$(".updatebutton").click(function(){//修改
+						var formData=$(".updateForm").serializeObject();
+						$.ajax({
+							url : '<s:url action="update" namespace="/sys/org"/>',
+							type:"POST",
+							data:formData,
+							cache:false,
+							success:function(data){
+								org.loadData(1);
+								$(".update_close").trigger("click");
+							},
+							error:function(data){
+								xerror(data.responseText);
+							}	
+						});
+					});
+				},
+				delete1:function(){
+					$(".deletebutton").click(function(){
+						var radio=$("#list").find(".tab-checkbox input[type='checkbox']");
+						var ids=[];
+						for(var i=0;i<radio.length;i++){
+							if(radio[i].checked==true){
+								ids.push($(radio[i]).data("id"));
+							}
+						}alert(ids);
+						xconfirm("确定删除选中组织及其子部门？", function() {
+							$.ajax({
+								url : '<s:url action="delete" namespace="/sys/org"/>',
+								type:"POST",
+								data:"ids=" + ids,
+								cache:false,
+								success:function(data){
+									
+								},
+								error:function(data){
+									xerror(data.responseText);
+								}	
+							});
+						});
+					});
+				}
+			};
+			$(".timeTip").datetimepicker({
+		    	format: 'yyyy-MM-dd',
+		    	minView:'month',
+		 		language:  'zh-CN',
+				autoclose: 1,
+		    });
+		    org.init();
+		</script>
+	</body>
+</html>

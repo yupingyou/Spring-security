@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+  xmlns:security="http://www.springframework.org/schema/security"  
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+  xsi:schemaLocation="http://www.springframework.org/schema/beans  
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+          http://www.springframework.org/schema/security  
+          http://www.springframework.org/schema/security/spring-security.xsd">  
+   <security:http use-expressions="true" access-decision-manager-ref="accessDecisionManager" >  
+   <!-- 忽略所有静态资源 -->
+   	<security:intercept-url pattern="/login.action" filters="none"/>
+    <security:intercept-url pattern="/**/*.css*" filters="none"/>
+   	<security:intercept-url pattern="/**/*.js" filters="none"/>
+   	<security:intercept-url pattern="/**/*.ico" filters="none"/>
+   	<security:intercept-url pattern="/**/*.jpg" filters="none"/>
+   	<security:intercept-url pattern="/**/*.ttf" filters="none"/>
+   	<security:intercept-url pattern="/**/*.woff*" filters="none"/>
+   	<security:intercept-url pattern="/**/*.html*" filters="none"/>
+   	<security:intercept-url pattern="/**/*.png*" filters="none"/>
+   	<security:intercept-url pattern="/**/*.wav*" filters="none"/>
+   	<security:intercept-url pattern="/login.jsp" filters="none" />
+  	<security:form-login login-page="/login.jsp" always-use-default-target="true" default-target-url="/index.jsp"/>
+  	<security:logout invalidate-session="true" logout-success-url="/login.jsp"/>
+  	<!-- 后登陆用户将前登陆用户踢出系统 -->
+  	<security:session-management><security:concurrency-control error-if-maximum-exceeded="false"/></security:session-management>
+  	<security:custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR"/>
+   </security:http>
+    
+   <security:authentication-manager alias="authenticationManager">
+   	<security:authentication-provider user-service-ref="userDetailService">
+   		<security:password-encoder ref="customPasswordEncoder"/>
+   	</security:authentication-provider>
+   </security:authentication-manager>
+  <bean id="userDetailService" class="com.xingguo.springSecurity.UserDetailServiceImpl"></bean>
+  <!-- 使用Spring security AffirmativeBased决策管理器，单个通过则全部通过 这里同时重定义权限code的前缀为AUTH_-->
+  <bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+  	<property name="decisionVoters">
+  		<list>
+  			<bean class="org.springframework.security.access.vote.RoleVoter">
+                    <property name="rolePrefix" value="AUTH_"/>
+             </bean>
+            <bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+  		</list>
+  	</property>
+  </bean>
+  <!-- 密码验证器 -->
+  <bean id="customPasswordEncoder" class="com.xingguo.springSecurity.encoder.CustomPasswordEncoder"></bean>
+  
+  <!-- 使用Spring security默认权限认证器，为属性securityMetadataSource设置元数据提供者 -->
+  <bean id="filterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+  	<property name="authenticationManager" ref="authenticationManager"></property>
+  	<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+  	<property name="securityMetadataSource" ref="secureResourceFilterInvocationDefinitionSource"></property>
+  </bean>
+  <!-- 自定义资源元数据供应器，提供整个应用所有需要控制的访问地址 -->
+  <bean id="secureResourceFilterInvocationDefinitionSource" class="com.xingguo.springSecurity.SecureResourceFilterInvocationDefinitionSource">
+  </bean>
+  
+</beans>  

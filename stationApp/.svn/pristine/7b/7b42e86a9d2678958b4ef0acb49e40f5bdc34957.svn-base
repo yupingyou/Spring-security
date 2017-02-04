@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>状态量</title>
+	</head>
+	<body>
+		<div class="navBar navBar_bg">
+			<div class="breadCrumb">
+				<ol>
+					<li title="供电系统监控">供电系统监控</li>
+					<li title="状态量">状态量</li>
+				</ol>
+			</div>
+		</div>
+		<div class="main_box">
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>状态量</title>
+	</head>
+	<style>
+		.faceplate .panel-body{line-height: 100px;}
+		/*黄色面板*/
+		.panel_yellow{ box-shadow: 1px 2px 10px rgba(255, 152, 0, 0.16); border-color: rgba(239, 108, 0, 0.21);}
+		.panel_yellow .panel_bg{background: linear-gradient(#FFA726,#EF6C00);}
+		.panel_yellow.panel-success > .panel-heading{color: #F57C00;border-color: #F57C00;}
+		/*红色面板*/
+		.panel_red{box-shadow:1px 2px 10px rgba(255, 87, 34, 0.13); border-color: rgba(255, 87, 34, 0.17);}
+		.panel_red .panel_bg{ background:linear-gradient(#FF5722,#BF360C);}
+		.panel_red.panel-success > .panel-heading{ color: #BF360C; border-color: #BF360C;}
+	</style>
+	<body>
+		<div class="navBar navBar_bg">
+			<div class="breadCrumb">
+				<ol>
+					<li title="供电系统监控">供电系统监控</li>
+					<li title="状态量">状态量</li>
+				</ol>
+			</div>
+		</div>
+		<div class="main_box">
+			<div class="col-xs-12 plf0 faceplate">
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15 panel_red"><!--panel_red为故障状态-->
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">智能终端状态</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<!--<p class="fz30">正常</p>-->
+							<p class="fz30">故障</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15">
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">通信状态</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<p class="fz30">正常</p>
+							<!--<p class="fz30">故障</p>-->
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15">
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">输入开关位置</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<!--<p class="fz30">跳闸</p>-->
+							<p class="fz30">合闸</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15">
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">输出开关位置</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<!--<p class="fz30">跳闸</p>-->
+							<p class="fz30">合闸</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15">
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">开关储能机构</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<p class="fz30">正常</p>
+							<!--<p class="fz30">故障</p>-->
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15">
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">操作电源</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<p class="fz30">正常</p>
+							<!--<p class="fz30">故障</p>-->
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15"><!--超压为panel_red,低压为panel_yellow-->
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">SF6气体密度及开关压力</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<p class="fz30">正常</p>
+							<!--<p class="fz30">超压</p>
+							<p class="fz30">低压</p>-->
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15">
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">相位检测</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<p class="fz30">正常</p>
+							<!--<p class="fz30">缺相</p>-->
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15">
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">过电压检测</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<p class="fz30">正常</p>
+							<!--<p class="fz30">超压</p>-->
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15">
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">短路检测</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<p class="fz30">正常</p>
+							<!--<p class="fz30">故障</p>-->
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15">
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">断路检测</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<p class="fz30">正常</p>
+							<!--<p class="fz30">断开</p>-->
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15">
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">继电器保护</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<p class="fz30">正常</p>
+							<!--<p class="fz30">故障</p>-->
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15">
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">绝缘检测</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<p class="fz30">正常</p>
+							<!--<p class="fz30">故障</p>-->
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15">
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">接地检测</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<p class="fz30">正常</p>
+							<!--<p class="fz30">故障</p>-->
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-2 plf0">
+					<div class="panel panel-success mr15">
+						<div class="panel-heading text-center panel_bg">
+							<img src="img/power/smprint.png" />
+							<span class="panel_title">防雷检测</span>
+						</div>
+						<div class="panel-body text-center lh40">
+							<p class="fz30">正常</p>
+							<!--<p class="fz30">雷击</p>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

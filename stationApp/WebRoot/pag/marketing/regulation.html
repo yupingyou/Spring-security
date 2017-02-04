@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>规则导入</title>
+	</head>
+	<style>
+	.scard_content_layout{ width:100%; margin: 10px auto;background: transparent;}
+	.scard_content_layout .scard_con{text-align: center;}
+	.scard_content_layout .scard_con .scard_title{ font-weight:700;}
+	.scard_content_layout .scard_con .scard_layout div{line-height: 50px;}
+	.scard_content_layout .scard_margin{width: 96px; left: 0; right: 0; margin: 0 auto;margin-top: 10px;}
+	.scard_content_layout .scard_margin .btn-warning{border-radius: 17px; width: 96px;}
+	.scard_content_layout .rule_input{text-align: center;}
+	.scard_content_layout .btn-default {background-color:transparent;}
+	.scard_content_layout .btn-default:active:focus{background-color: transparent !important;border-color: transparent !important;}
+	.scard_content_layout .rule_input_btn:hover {background-color: #d4d4d4;}
+	.scard_content_layout .rule_input_btn{text-align: center; width: 100%; line-height: 40px;}
+	.scard_content_layout .rule_input .rule_input_left{float: left;padding-left: 25px;}
+	.scard_content_layout .rule_input .rule_input_right{float: right; padding-right: 25px;}
+	.scard_content_layout .rule_input_btn .rule_input_btn_left{float: left; padding-left: 25px;}
+	.scard_content_layout .rule_input_btn .rule_input_btn_right{float: right; padding-right:45px;}
+	
+	.xform.pop2 >div { width: 940px; max-width: 940px;}
+	.rule_content_layout .rule_layout_one{ border: 1px solid #ccc;}
+	.rule_content_layout .rule_layout_two{ border: 1px solid #D30F0F;}
+	.rule_content_layout .rule_con_pad{padding-top: 15px; margin-bottom: 15px;}
+	.rule_content_layout .rule_lay_d .rule_con_layout{padding: 15px;}
+	.rule_content_layout .rule_con_pad .rule_lay_d .panel{margin-bottom: 0;}
+	.rule_content_layout .rule_con_pad .rule_lay_d .panel-default{background: #eaeaea;color: #FF9800; padding: 8px; border: 0px solid transparent;    box-shadow: 0 0 0 rgba(0, 0, 0, .05);}
+	.rule_content_layout .rule_con_pad .rule_lay_d .panel-default .panel-body{margin: 0px auto;width: 52px;padding: 0; font-size: 14px;}
+	.rule_content_layout .rule_con_pad .rule_lay_d .left_start{font-weight: 700;}
+	.rule_content_layout .rule_con_pad .rule_lay_d .charging_time{float: right; width: 112px;height: 20px; display: inline-block;text-align: center;}
+	.rule_content_layout .rule_con_pad .rule_lay_d .charging_number{float: right; width: 104px;height: 20px; display: inline-block;text-align: center;}
+	.rule_content_layout .rule_con_pad .rule_lay_d .charging_number_center{float: right; width: 112px;height: 20px; display: inline-block;text-align: center;}
+	.rule_content_layout .rule_con_pad .rule_lay_d .charging_number_last{float: right; width: 120px;height: 20px; display: inline-block;text-align: center;}
+	.rule_content_layout .rule_con_pad .rule_lay_d .charging_vacancy_number{float: right; width: 110px;height: 20px; display: inline-block;text-align: center;}
+	.rule_content_layout .rule_con_pad .rule_lay_d .charging_discount_number{float: right; width: 134px;height: 20px; display: inline-block;text-align: center;}
+	.rule_content_layout .rule_con_pad .rule_lay_d .right_end{float: right;font-weight: 700;}
+	.rule_content_layout .rule_con_pad .rule_lay_d .rules_padtop{padding-top: 8px;}
+	.rule_content_layout .rule_con_pad .rule_lay_d .rule_pad_left{padding-left: 5px;}
+	</style>
+	<body>
+		<div class="module">
+			<!--左侧工具栏 stars-->
+			<div class="tool_left" id="monmenu">
+				<div class="title"><a href="javascript:;"><span class="icon glyphicon glyphicon-chevron-left" id="slidicon"></span></a></div>
+				<div class="tool" id="options">
+					<ul class="toolp" id="pSubMenu">
+						<li class="station">
+							<a class="add" href="javascript:;" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="规则导入" onclick="optsedit(this,'checkbox')" >
+								<i class="icon active glyphicon glyphicon-import "></i>
+								规则导入
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--end 左侧工具栏-->
+			<div class="contentbox">
+				<div class="navBar navBar_bg">
+					<div class="breadCrumb">
+						<ol>
+							<li title="营销管理">营销管理</li>
+							<li title="会员中心">会员中心</li>
+						</ol>
+					</div>
+				</div>
+				<div class="main_box">
+					<table class="table table-striped mtable-striped table-hover table_hide" id="list">
+							<thead>
+								<tr>
+									<th class="tab-checkbox">
+									</th>
+									<th>序号</th>
+									<th>充电站名称</th>
+									<th>桩体类型</th>
+									<th>桩体编号</th>
+									<th>计费规则</th>
+									<th>实施开始时间</th>
+									<th>详情</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>1</td>
+									<td>雅居乐中心</td>
+									<td>一体式直流桩</td>
+									<td>1#</td>
+									<td>模式一</td>
+									<td>2015-10-10</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>2</td>
+									<td>雅居乐中心</td>
+									<td>一体式直流桩</td>
+									<td>2#</td>
+									<td>模式一</td>
+									<td>2015-11-01</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>3</td>
+									<td>雅居乐中心</td>
+									<td>挂壁式交流桩</td>
+									<td>3#</td>
+									<td>模式一</td>
+									<td>2015-12-10</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>4</td>
+									<td>雅居乐中心</td>
+									<td>挂壁式交流桩</td>
+									<td>4#</td>
+									<td>模式一</td>
+									<td>2015-12-30</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>5</td>
+									<td>雅居乐中心</td>
+									<td>挂壁式交流桩</td>
+									<td>5#</td>
+									<td>模式一</td>
+									<td>2016-02-01</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>6</td>
+									<td>雅居乐中心</td>
+									<td>挂壁式交流桩</td>
+									<td>6#</td>
+									<td>模式一</td>
+									<td>2016-02-25</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>7</td>
+									<td>雅居乐中心</td>
+									<td>落地式交流桩</td>
+									<td>7#</td>
+									<td>模式一</td>
+									<td>2016-04-01</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>8</td>
+									<td>雅居乐中心</td>
+									<td>落地式交流桩</td>
+									<td>8#</td>
+									<td>模式一</td>
+									<td>2016-04-25</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>9</td>
+									<td>雅居乐中心</td>
+									<td>落地式交流桩</td>
+									<td>9#</td>
+									<td>模式一</td>
+									<td>2016-05-10</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>10</td>
+									<td>雅居乐中心</td>
+									<td>落地式交流桩</td>
+									<td>10#</td>
+									<td>模式一</td>
+									<td>2016-05-30</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>11</td>
+									<td>雅居乐中心</td>
+									<td>落地式交流桩</td>
+									<td>11#</td>
+									<td>模式一</td>
+									<td>2016-05-30</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>12</td>
+									<td>雅居乐中心</td>
+									<td>落地式交流桩</td>
+									<td>12#</td>
+									<td>模式一</td>
+									<td>2016-05-30</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>13</td>
+									<td>雅居乐中心</td>
+									<td>落地式交流桩</td>
+									<td>13#</td>
+									<td>模式一</td>
+									<td>2016-05-30</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>14</td>
+									<td>雅居乐中心</td>
+									<td>落地式交流桩</td>
+									<td>14#</td>
+									<td>模式一</td>
+									<td>2016-05-30</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="tab-checkbox">
+										<input type="checkbox" name="select" value="" />
+										<input type="radio" name="single" value="" />
+									</td>
+									<td>15</td>
+									<td>雅居乐中心</td>
+									<td>落地式交流桩</td>
+									<td>15#</td>
+									<td>模式一</td>
+									<td>2016-05-30</td>
+									<td>
+										<a class="find" href="javascript:;" title="查看" onclick="openpop(this)">查看</a>
+									</td>
+								</tr>
+							</tbody>
+							<!--分页 stars-->
+							<tfoot>
+								<tr>
+									<td colspan="7">
+										<div class="col-xs-12">
+											<ul class="btn-tool" id="toolBar">
+												<!--导入规则-->
+												<li class="add">
+													<button type="button" class="add btn btn-warning" title="导入" onclick="openpop(this,'checkbox')">
+														<span class="ico"><i class="iconfont icon-cg"></i></span><span class="iconchar">导入</span>
+													</button>
+													<button type="button" class="btn btn-default tool-cancel" title="取消">
+														<span class="ico"><i class="iconfont icon-cw"></i></span><span class="iconchar">取消</span>
+													</button>
+												</li>
+											</ul>
+										</div>	
+										<div class="col-xs-12 fany_place" id="ftpage">
+											<ul class="pagination pagination-color">
+												<li class="start invisible">
+													<a href="javascript:;" title="首页">首页</a>
+												</li>
+												<li class="prev disabled">
+													<a href="javascript:;" title="上一页"><span>上一页</span></a>
+												</li>
+												<li class="leaf active">
+													<a href="javascript:;">1</a>
+												</li>
+												<li class="leaf">
+													<a href="javascript:;">2</a>
+												</li>
+												<li class="leaf">
+													<a href="javascript:;">3</a>
+												</li>
+												<li class="leaf">
+													<a href="javascript:;">4</a>
+												</li>
+												<li class="leaf">
+													<a href="javascript:;">5</a>
+												</li>
+												<li class="next">
+													<a href="javascript:;" title="下一页"><span>下一页</span></a>
+												</li>
+												<li class="end">
+													<a href="javascript:;" title="尾页">尾页</a>
+												</li>
+												<span class="fany">&nbsp;第 1 页 &nbsp;|&nbsp;共 5 页</span>
+											</ul>
+										</div>
+									</td>
+								</tr>
+							</tfoot>
+							<!--end 分页-->
+				        </table>
+				</div>
+			</div>
+		</div>	
+		<!--规则导入 stars-->
+		<div class="xform" id="add">
+			<div>
+				<div class="f_haeder">
+					<span>规则导入</span>
+					<a class="f_close" href="javascript:;" title="关闭">
+						<span></span>
+					</a>
+				</div>
+				<form class="f_cont">
+					<div class="scard_content_layout">
+						<div class="rule_input">
+							<span class="rule_input_left">序号</span>
+							<span>模式名称</span>
+							<span class="rule_input_right">时段总数</span>	
+						</div>		
+						<button type="button" class="rule_input_btn btn-default">
+							<span class="rule_input_btn_left">1</span>
+							<span>模式1</span>
+							<span class="rule_input_btn_right">6</span>					
+						</button>
+						<button type="button" class="rule_input_btn btn-default">
+							<span class="rule_input_btn_left">2</span>
+							<span>模式2</span>
+							<span class="rule_input_btn_right">6</span>					
+						</button>
+						<div class="scard_margin two_padding">
+							<button  type="button" class="btn btn-warning" title="确定">确定</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!--end 规则导入-->
+		<!--详情查看 stars-->
+		<div class="xform pop2" id="find">
+			<div>
+				<div class="f_haeder">
+					<span>详情查看</span>
+					<a class="f_close" href="javascript:;" title="关闭">
+						<span></span>
+					</a>
+				</div>
+				<form class="f_cont">
+					<div class="rule_content_layout">
+						<div class="col-xs-12 rule_con_pad">
+							<div class="col-xs-4">
+								<div class="rule_layout_one rule_lay_d">
+									<div class="panel panel-default">
+									  <div class="panel-body">
+									    	时间段1
+									  </div>
+									</div>
+									<div class="rule_con_layout">
+										<div class="rules_left">
+											<div>
+												<div class="left_start">开始时间： 
+													<div class="charging_time">00:00 上午</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">结束时间：
+													<div class="charging_time">03:00 上午</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">充电费：
+													<div class="charging_number">1.5
+														<span class="rule_pad_left">¥/KWH</span>
+													</div>
+												</div>		
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">服务费：
+													<div class="charging_number_center">1
+														<span class="rule_pad_left">¥/KWH</span>
+													</div>
+												</div>										
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">停车费：
+													<div class="charging_number_last">5
+														<span class="rule_pad_left">¥/h</span>
+													</div>
+												</div>										
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">预约空置费：
+													<div class="charging_vacancy_number">0.05
+														<span class="rule_pad_left">¥/min</span>
+													</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">折扣率：
+													<div class="charging_discount_number">110
+														<span class="rule_pad_left">%</span>
+													</div>
+												</div>	
+											</div>
+										</div>
+									</div>
+								</div>	
+							</div>
+							<div class="col-xs-4">
+								<div class="rule_layout_one rule_lay_d">
+									<div class="panel panel-default">
+									  <div class="panel-body">
+									    	时间段2
+									  </div>
+									</div>
+									<div class="rule_con_layout">
+										<div class="rules_left">
+											<div>
+												<div class="left_start">开始时间： 
+													<div class="charging_time">03:00 上午</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">结束时间：
+													<div class="charging_time">06:00 上午</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">充电费：
+													<div class="charging_number">1.5
+														<span class="rule_pad_left">¥/KWH</span>
+													</div>
+												</div>		
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">服务费：
+													<div class="charging_number_center">1
+														<span class="rule_pad_left">¥/KWH</span>
+													</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">停车费：
+													<div class="charging_number_last">5
+														<span class="rule_pad_left">¥/h</span>
+													</div>
+												</div>										
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">预约空置费：
+													<div class="charging_vacancy_number">0.05
+														<span class="rule_pad_left">¥/min</span>
+													</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">折扣率：
+													<div class="charging_discount_number">95
+														<span class="rule_pad_left">%</span>
+													</div>
+												</div>	
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="rule_layout_one rule_lay_d">
+									<div class="panel panel-default">
+									  <div class="panel-body">
+									    	时间段3
+									  </div>
+									</div>
+									<div class="rule_con_layout">
+										<div class="rules_left">
+											<div>
+												<div class="left_start">开始时间： 
+													<div class="charging_time">06:00 上午</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">结束时间：
+													<div class="charging_time">10:00 上午</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">充电费：
+													<div class="charging_number">1.5
+														<span class="rule_pad_left">¥/KWH</span>
+													</div>
+												</div>		
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">服务费：
+													<div class="charging_number_center">1
+														<span class="rule_pad_left">¥/KWH</span>
+													</div>
+												</div>	
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">停车费：
+													<div class="charging_number_last">5
+														<span class="rule_pad_left">¥/h</span>
+													</div>
+												</div>										
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">预约空置费：
+													<div class="charging_vacancy_number">0.05
+														<span class="rule_pad_left">¥/min</span>
+													</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">折扣率：
+													<div class="charging_discount_number">80
+														<span class="rule_pad_left">%</span>
+													</div>
+												</div>	
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 rule_con_pad">
+							<div class="col-xs-4">
+								<div class="rule_layout_one rule_lay_d">
+									<div class="panel panel-default">
+									  <div class="panel-body">
+									    	时间段4
+									  </div>
+									</div>
+									<div class="rule_con_layout">
+										<div class="rules_left">
+											<div>
+												<div class="left_start">开始时间： 
+													<div class="charging_time">10:00 上午</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">结束时间：
+													<div class="charging_time">16:00 下午</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">充电费：
+													<div class="charging_number">1.5
+														<span class="rule_pad_left">¥/KWH</span>
+													</div>
+												</div>		
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">服务费：
+													<div class="charging_number_center">1
+														<span class="rule_pad_left">¥/KWH</span>
+													</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">停车费：
+													<div class="charging_number_last">5
+														<span class="rule_pad_left">¥/h</span>
+													</div>
+												</div>										
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">预约空置费：
+													<div class="charging_vacancy_number">0.05
+														<span class="rule_pad_left">¥/min</span>
+													</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">折扣率：
+													<div class="charging_discount_number">110
+														<span class="rule_pad_left">%</span>
+													</div>
+												</div>	
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="rule_layout_one rule_lay_d">
+									<div class="panel panel-default">
+									  <div class="panel-body">
+									    	时间段5
+									  </div>
+									</div>
+									<div class="rule_con_layout">
+										<div class="rules_left">
+											<div>
+												<div class="left_start">开始时间：
+													<div class="charging_time">16:00 下午</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">结束时间：
+													<div class="charging_time">21:00 下午</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">充电费：
+													<div class="charging_number">1.5
+														<span class="rule_pad_left">¥/KWH</span>
+													</div>
+												</div>		
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">服务费：
+													<div class="charging_number_center">1
+														<span class="rule_pad_left">¥/KWH</span>
+													</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">停车费：
+													<div class="charging_number_last">5
+														<span class="rule_pad_left">¥/h</span>
+													</div>
+												</div>										
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">预约空置费：
+													<div class="charging_vacancy_number">0.05
+														<span class="rule_pad_left">¥/min</span>
+													</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">折扣率：
+													<div class="charging_discount_number">90
+														<span class="rule_pad_left">%</span>
+													</div>
+												</div>	
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="rule_layout_one rule_lay_d">
+									<div class="panel panel-default">
+									  <div class="panel-body">
+									    	时间段6
+									  </div>
+									</div>
+									<div class="rule_con_layout">
+										<div class="rules_left">
+											<div>
+												<div class="left_start">开始时间：
+													<div class="charging_time">21:00 下午</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">结束时间：
+													<div class="charging_time">00:00 下午</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">充电费：
+													<div class="charging_number">1.5
+														<span class="rule_pad_left">¥/KWH</span>
+													</div>
+												</div>		
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">服务费：
+													<div class="charging_number_center">1
+														<span class="rule_pad_left">¥/KWH</span>
+													</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">停车费：
+													<div class="charging_number_last">5
+														<span class="rule_pad_left">¥/h</span>
+													</div>
+												</div>										
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">预约空置费：
+													<div class="charging_vacancy_number">0.05
+														<span class="rule_pad_left">¥/min</span>
+													</div>
+												</div>
+											</div>
+											<div class="rules_padtop">
+												<div class="left_start">折扣率：
+													<div class="charging_discount_number">110
+														<span class="rule_pad_left">%</span>
+													</div>
+												</div>	
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>		
+				</form>
+			</div>
+		</div>
+		<!--end 详情查看-->
+		<script>
+			$(function(){
+				var nav={
+					init:function(){
+						nav.tab();
+					},
+					tab:function(){//tab切换
+						$(".rule_input_btn").click(function(){
+							$(this).addClass("btn-info").removeClass("btn-default").siblings().removeClass("btn-info").addClass("btn-default");
+						});	
+					}
+				}
+				
+				nav.init();
+			})
+		</script>
+	</body>
+</html>

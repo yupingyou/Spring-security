@@ -1,0 +1,20 @@
+package com.xingguo.service.sys;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Map;
+
+import com.xingguo.entity.AppUsers;
+
+
+
+public interface AppUserService {
+	public AppUsers findById(String id);
+	
+	public void save(AppUsers user);
+	
+	public AppUsers findByUserLoginName(String userLoginName);
+
+	Map<String, String> findUserByLoginNameAndPassword(String loginName,
+			String password) throws FileNotFoundException, IOException;
+}

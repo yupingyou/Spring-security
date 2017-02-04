@@ -1,0 +1,84 @@
+package com.xingguo.action.common;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+import com.xingguo.dao.common.impl.BaseDaoImpl;
+import com.xingguo.entity.common.PaginationSupport;
+import com.xingguo.utils.Const;
+
+public abstract class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
+	protected static final Logger log =Logger.getLogger(BaseAction.class);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected Map<String, Object> jsonData;
+	
+	protected int pageNo=Const.DEFAULT_PAGE_NO;
+	
+	protected int pageSize=Const.DEFAULT_PAGE_SIZE;
+	
+	protected T entity;
+	
+	protected String JSON_RESULT="jsonResult";
+	
+	
+	protected PaginationSupport<T> pagination;
+	
+	protected Map<String, Object> condition=new HashMap<String, Object>();
+
+	/**
+	 * @return the jsonData
+	 */
+	public Map<String, Object> getJsonData() {
+		return jsonData;
+	}
+
+	/**
+	 * @param jsonData the jsonData to set
+	 */
+	public void setJsonData(Map<String, Object> jsonData) {
+		this.jsonData = jsonData;
+	}
+
+	public T getEntity() {
+		return entity;
+	}
+
+	public void setEntity(T entity) {
+		this.entity = entity;
+	}
+
+	public int getPageNo() {
+		return pageNo;
+	}
+
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public PaginationSupport<T> getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(PaginationSupport<T> pagination) {
+		this.pagination = pagination;
+	}
+	
+	
+	
+}

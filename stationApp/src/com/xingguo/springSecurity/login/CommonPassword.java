@@ -1,0 +1,126 @@
+package com.xingguo.springSecurity.login;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Properties;
+
+import com.xingguo.action.common.BaseAction;
+import com.xingguo.springSecurity.encoder.EncryptUtils;
+import com.xingguo.utils.Const;
+import com.xingguo.utils.DateUtil;
+/**
+ * 通用密码管理
+ * @author youyp
+ *
+ */
+public class CommonPassword extends BaseAction<Object> {
+
+	private String value;
+	
+	public String list(){
+		jsonData=new HashMap<String, Object>();
+		try {
+			String path=System.getProperty("user.dir")+File.separator+"commom.properties";
+			Properties properties=new Properties();
+			properties.load(new FileInputStream(new File(path)));
+			String createDate = properties.getProperty("createDate", "");
+			String updateDate = properties.getProperty("updateDate", "");
+			String value = properties.getProperty("value", "");
+			String state = properties.getProperty("state", "");
+			EncryptUtils utils=new EncryptUtils();
+			String key=Const.AES_KEY;
+			String aesKey=utils.getAESKey(utils.encryptToSHA(key));//sha加密
+			String painValue = utils.decryptByAES(aesKey, value);//使用SHA加密后的AESkey进行AES解密
+			jsonData.put("createDate", createDate);
+			jsonData.put("updateDate", updateDate);
+			jsonData.put("value", painValue);
+			jsonData.put("state", state);
+			
+		} catch (Exception e) {
+			log.error("",e);
+			jsonData.put("status", 1);
+			jsonData.put("msg", e.getMessage());
+		}
+		
+		return JSON_RESULT;
+	}
+	
+	public String update(){
+		jsonData=new HashMap<String, Object>();
+		try {
+			String path=System.getProperty("user.dir")+File.separator+"commom.properties";
+			Properties properties=new Properties();
+			FileOutputStream out = new FileOutputStream(new File(path),true);
+			EncryptUtils utils=new EncryptUtils();
+			String aesKey=utils.getAESKey(utils.encryptToSHA(Const.AES_KEY));//sha加密
+			String secureValue = utils.encryptToAES(aesKey, value);//使用SHA加密后的AESkey进行AES加密
+			properties.setProperty("value", secureValue);
+			properties.setProperty("updateDate", DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+			properties.store(out, "");
+			jsonData.put("status", 0);
+			jsonData.put("msg", Const.SUCCESS_STR);
+		} catch (Exception e) {
+			log.error("",e);
+			jsonData.put("status", 0);
+			jsonData.put("msg", Const.FAIL_STR);
+		}
+		
+		return JSON_RESULT;
+	}
+	
+	public String lock(){
+		jsonData=new HashMap<String, Object>();
+		try {
+			String path=System.getProperty("user.dir")+File.separator+"commom.properties";
+			Properties properties=new Properties();
+			FileOutputStream out = new FileOutputStream(new File(path),true);
+			properties.setProperty("state", "1");
+			properties.setProperty("updateDate", DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+			properties.store(out, "");
+			jsonData.put("status", 0);
+			jsonData.put("msg", Const.SUCCESS_STR);
+		} catch (Exception e) {
+			log.error("",e);
+			jsonData.put("status", 0);
+			jsonData.put("msg", Const.FAIL_STR);
+		}
+		return JSON_RESULT;
+	}
+	
+	public String unlock(){
+		jsonData=new HashMap<String, Object>();
+		try {
+			String path=System.getProperty("user.dir")+File.separator+"commom.properties";
+			Properties properties=new Properties();
+			FileOutputStream out = new FileOutputStream(new File(path),true);
+			properties.setProperty("state", "0");
+			properties.setProperty("updateDate", DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+			properties.store(out, "");
+			jsonData.put("status", 0);
+			jsonData.put("msg", Const.SUCCESS_STR);
+		} catch (Exception e) {
+			log.error("",e);
+			jsonData.put("status", 0);
+			jsonData.put("msg", Const.FAIL_STR);
+		}
+		return JSON_RESULT;
+	}
+	
+	@Override
+	public Object getModel() {
+		return null;
+	}
+	
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+}

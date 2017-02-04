@@ -1,0 +1,50 @@
+package com.xingguo.dao.sys.impl;
+
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+import com.xingguo.dao.common.impl.BaseDaoImpl;
+import com.xingguo.dao.sys.AppOrgDao;
+import com.xingguo.entity.AppOrg;
+import com.xingguo.entity.common.PaginationSupport;
+
+@Repository
+public class AppOrgDaoImpl extends BaseDaoImpl<AppOrg> implements AppOrgDao{
+
+	@Override
+	public PaginationSupport<AppOrg> findPageWithCondition(
+			Map<String, Object> condition, int pageNo, int pageSize) {
+		String hql=" from AppOrg "+getHQLCondition(condition)+" order by createDate desc";
+		return findListByPageWithCondition(hql, pageSize, pageNo, condition);
+	}
+
+	private String getHQLCondition(Map<String, Object> map){
+		StringBuffer sf=new StringBuffer(" where 1=1 ");
+		if(map!=null&&map.size()>0){
+			if(map.get("userLoginName")!=null){
+				sf.append(" and userLoginName=:userLoginName");
+			}
+			if(map.get("mobilePhone")!=null){
+				sf.append(" and mobilePhone=:mobilePhone");
+			}
+			if(map.get("orgName")!=null){
+				sf.append(" and org.orgName=:orgName");
+			}
+			if(map.get("userName")!=null){
+				sf.append(" and userName=:userName");
+			}
+			if(map.get("disabled")!=null){
+				sf.append(" and disabled=:disabled");
+			}
+			if(map.get("dateStart")!=null){
+				sf.append(" and createDate>=:dateStart");
+			}
+			if(map.get("dateEnd")!=null){
+				sf.append(" and createDate<=:dateEnd");
+			}
+		}
+		sf.append(" and deleteFlag='1' ");
+		return sf.toString();
+	}
+}

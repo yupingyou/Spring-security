@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>兴国充电桩运营管理系统</title>
+	</head>
+	<link rel="shortcut icon" href="img/16.ico" type="image/x-icon"/>
+	<!--bootshrapCSS-->
+	<link rel="stylesheet" href="css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/common/common.css"/>
+	<link rel="stylesheet" href="css/common/bootstrapfilter.css"/>
+	<!--jQery加载-->
+	<script src="js/jquery.js"></script>
+	<!--bootshrap基础JS-->
+	<script src="js/bootstrap.js"></script>
+	<style>
+		body{background:url(img/login.jpg) no-repeat 0 -70px; background-size:cover;}
+		.logo{ position: absolute; top: 50px; left: 56px;}
+		.main{position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto; width: 540px; height: 345px; overflow: hidden; background: rgba(255,255,255,0.8); border-radius: 10px;}
+		.main .title{width: 100%; height: 70px; text-align: center; background: #cc161e;
+					background: -webkit-linear-gradient(#d6131c, #922229);
+					background: -moz-linear-gradient(#d6131c, #922229);
+					background: -o-linear-gradient(#d6131c, #922229);
+					background: -webkit-gradient(linear, 0 0, 0 100%, from(#d6131c), to(#922229));
+					background: linear-gradient(#d6131c, #922229); /* Safari 5.1 - 6.0 */ 		}
+		.main .title .title_font{ line-height: 70px; font-size: 24px; color: #fff; font-family: "微软雅黑";}
+		.main .text {position: relative; width: 100%; padding-top:45px ; height: calc(100% - 70px); }
+		.main .text .box{position: relative;left: 0; top: 0; right: 0 ; bottom: 0;  margin:auto; width: 80%; text-align: center;}
+		.main .text .box .input-group{margin-bottom: 20px;}
+		.main .text .box .input-group .input-group-addon { background-color: #fff; border-right: 0;}
+		.main .text .box .input-group .form-control{}
+		.main .text .box .btn {width: 110px;}
+		
+	</style>
+	<body>
+		<div class="logo">
+			<img src="img/logo.png" />
+		</div>
+		<div class="main">
+			<div class="title">
+				<span class="title_font">充电桩运营管理系统</span>
+			</div>
+			<div class="text">
+				<form>
+					<div class="box">
+						<div class="input-group input-group-lg">
+					      <span class="input-group-addon glyphicon glyphicon-user"></span>
+					      <input class="form-control" autofocus="autofocus"  type="text" placeholder="Admin">
+					    </div>
+					    <div class="input-group input-group-lg">
+					      <span class="input-group-addon glyphicon glyphicon-lock"></span>
+					      <input class="form-control" type="password" placeholder="Possword">
+					    </div>
+					    <a class="btn btn-danger btn-lg" href="index.html">GO</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
